@@ -52,7 +52,7 @@ defmodule MLLParty.ConnectionHub do
   @doc """
   Sends a message to the client connection process for the given `ip` and `port`.
   """
-  def send_message(ip, port, message, opts \\ []) do
+  def send_message(ip, port, message, _opts \\ []) do
     pid =
       case start_client(ip, port) do
         {:ok, pid} ->
