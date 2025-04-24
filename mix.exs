@@ -43,6 +43,7 @@ defmodule MLLParty.MixProject do
       {:mllp, git: "https://github.com/HCA-Healthcare/elixir-mllp.git"},
       {:elixir_hl7, "~> 0.9.2", override: true},
       {:httpoison, "~> 2.0"},
+      {:sentry, "~> 10.2.0"},
       {:hackney, "~> 1.8"}
     ]
   end

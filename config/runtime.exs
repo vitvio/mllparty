@@ -69,6 +69,12 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :sentry,
+    dsn: "https://d0e4b1cf84d291f9776c1e2676c8599f@o4509207990960128.ingest.de.sentry.io/4509208149557328",
+    environment_name: :prod,
+    enable_source_code_context: true,
+    root_source_code_paths: [File.cwd!()],
+    included_environments: [:prod]
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
