@@ -16,6 +16,9 @@ defmodule Mix.Tasks.SendMllp do
   end
 
   def run(["mllp://" <> endpoint, message]) do
+    # Ensure the application is started
+    Application.ensure_all_started(:mllparty)
+
     [ip, port] = String.split(endpoint, ":")
     port = String.to_integer(port)
     message = HL7.Message.new(message)
