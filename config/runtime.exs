@@ -69,16 +69,6 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :sentry,
-    dsn: System.fetch_env!("SENTRY_DSN"),
-    environment_name: :prod,
-    enable_source_code_context: true,
-    root_source_code_path: File.cwd!(),
-    tags: %{
-      env: System.fetch_env!("SENTRY_ENV")
-    },
-    included_environments: [:prod]
-
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
