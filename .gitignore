@@ -25,3 +25,5 @@ mllparty-*.tar
 .elixir_ls
 
 .idea
+
+.mise.toml

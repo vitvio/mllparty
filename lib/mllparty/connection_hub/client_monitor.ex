@@ -74,10 +74,7 @@ defmodule MLLParty.ConnectionHub.ClientMonitor do
         "#{endpoint} connection is up. Last down duration: #{TimeUtils.format_seconds(seconds)}."
 
       Logger.info(message)
-      # If a downtime notification was sent, follow up that it's connected again
-      if state.down_notification_sent do
-        SlackNotification.send_notification(message)
-      end
+
     end
 
     # Reset down_at, down_notification_sent
@@ -118,8 +115,7 @@ defmodule MLLParty.ConnectionHub.ClientMonitor do
                   "#{endpoint} connection has been down for #{duration} seconds (mllp client connection status unavailable, reason: #{reason})"
               end
 
-            Logger.warn(message)
-            SlackNotification.send_notification(message)
+            Logger.warning(message, __MODULE__)
             true
           else
             state.down_notification_sent

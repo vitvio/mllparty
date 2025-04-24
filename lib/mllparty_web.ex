@@ -43,7 +43,6 @@ defmodule MLLPartyWeb do
         layouts: [html: MLLPartyWeb.Layouts]
 
       import Plug.Conn
-      import MLLPartyWeb.Gettext
 
       unquote(verified_routes())
     end
