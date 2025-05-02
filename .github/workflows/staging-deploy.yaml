@@ -3,7 +3,7 @@ name: Staging Deploy
 on:
   push:
     branches:
-      - main
+      - eng-1005-deployment-of-mmlparty-in-staging
   workflow_dispatch:
     inputs:
       target:
