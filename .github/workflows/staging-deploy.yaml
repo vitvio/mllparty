@@ -22,13 +22,13 @@ jobs:
       REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
       REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
 
-  # deploy-staging:
-  #   if: github.event_name == 'push' || github.event.inputs.target == 'staging'
-  #   needs: build
-  #   uses: ./.github/workflows/_template-deploy.yaml
-  #   with:
-  #     client_slug: "staging"
-  #     image_tag: ${{ github.sha }}
-  #   secrets:
-  #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-  #     REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+  deploy-staging:
+    if: github.event_name == 'push' || github.event.inputs.target == 'staging'
+    needs: build
+    uses: ./.github/workflows/_template-deploy.yaml
+    with:
+      client_slug: "staging"
+      image_tag: ${{ github.sha }}
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
