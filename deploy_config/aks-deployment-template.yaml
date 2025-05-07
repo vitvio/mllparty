@@ -14,18 +14,6 @@ spec:
       labels:
         app: mllparty
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - mllparty
-              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: mllparty
           image: $image
