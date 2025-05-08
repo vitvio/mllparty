@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.client_slug }}
     env:
-      image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/mllp:${{ inputs.image_tag }}
+      image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/mllparty:${{ inputs.image_tag }}
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@main
