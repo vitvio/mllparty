@@ -9,8 +9,7 @@ import Config
 
 config :mllparty,
   app_env: config_env(),
-  namespace: MLLParty,
-  api_key: "sekret"
+  namespace: MLLParty
 
 # Configures the endpoint
 config :mllparty, MLLPartyWeb.Endpoint,

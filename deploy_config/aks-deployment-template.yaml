@@ -33,11 +33,6 @@ spec:
                 secretKeyRef:
                   name: client-api-secret-key-base
                   key: SECRET_KEY_BASE
-            - name: API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: client-api-secret-key-base
-                  key: API_KEY
             - name: NODE_NAME
               valueFrom:
                 fieldRef:

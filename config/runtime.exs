@@ -45,9 +45,6 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  api_key = System.get_env("API_KEY") || raise "environment variable API_KEY is missing."
-  config :mllparty, api_key: api_key
-
   slack_webhook_url = System.get_env("SLACK_WEBHOOK_URL")
   config :mllparty, slack_webhook_url: slack_webhook_url
 
