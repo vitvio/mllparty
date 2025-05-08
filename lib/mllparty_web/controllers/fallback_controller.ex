@@ -18,22 +18,6 @@ defmodule MLLPartyWeb.FallbackController do
     |> json(%{message: message})
   end
 
-  def call(conn, {:error, :missing_api_key}) do
-    Logger.info("Missing API key")
-
-    conn
-    |> put_status(:unauthorized)
-    |> json(%{message: "Missing API key"})
-  end
-
-  def call(conn, {:error, :invalid_api_key}) do
-    Logger.info("Invalid API key")
-
-    conn
-    |> put_status(:unauthorized)
-    |> json(%{message: "Invalid API key"})
-  end
-
   def call(conn, {:error, :unauthorized}) do
     Logger.info("Unauthorized")
 

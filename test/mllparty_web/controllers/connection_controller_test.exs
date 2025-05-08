@@ -3,43 +3,17 @@ defmodule MLLPartyWeb.ConnectionControllerTest do
 
   @moduletag capture_log: true
 
-  @api_key "test_sekret"
   @api_endpoint "/api/connections"
 
   setup do
-    original_api_key = Application.get_env(:mllparty, :api_key)
-    Application.put_env(:mllparty, :api_key, @api_key)
-
-    authd_conn = build_conn() |> basic_auth("", @api_key)
-
     on_exit(fn ->
       MLLParty.ConnectionHub.reset()
-      Application.put_env(:mllparty, :api_key, original_api_key)
     end)
 
-    {:ok, %{conn: authd_conn}}
+    {:ok, %{conn: build_conn()}}
   end
 
   describe "GET #{@api_endpoint}" do
-    test "with missing API key" do
-      resp =
-        build_conn()
-        |> get(@api_endpoint)
-        |> json_response(401)
-
-      assert resp == %{"message" => "Missing API key"}
-    end
-
-    test "with invalid API key" do
-      resp =
-        build_conn()
-        |> basic_auth("", "invalid")
-        |> get(@api_endpoint)
-        |> json_response(401)
-
-      assert resp == %{"message" => "Invalid API key"}
-    end
-
     test "when no active connections", %{conn: conn} do
       conn = get(conn, @api_endpoint)
       assert json_response(conn, 200)["connections"] == []
@@ -73,25 +47,6 @@ defmodule MLLPartyWeb.ConnectionControllerTest do
   end
 
   describe "POST #{@api_endpoint}" do
-    test "with missing API key" do
-      resp =
-        build_conn()
-        |> post(@api_endpoint)
-        |> json_response(401)
-
-      assert resp == %{"message" => "Missing API key"}
-    end
-
-    test "with invalid API key" do
-      resp =
-        build_conn()
-        |> basic_auth("", "invalid")
-        |> post(@api_endpoint)
-        |> json_response(401)
-
-      assert resp == %{"message" => "Invalid API key"}
-    end
-
     test "with invalid endpoint", %{conn: conn} do
       conn = post(conn, @api_endpoint, %{endpoint: "127.0.0.1"})
       assert json_response(conn, 400)["message"] == "Invalid `endpoint` param: 127.0.0.1"

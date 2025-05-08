@@ -5,42 +5,16 @@ defmodule MLLPartyWeb.MLLPMessageControllerTest do
 
   @moduletag capture_log: true
 
-  @api_key "test_sekret"
   @api_endpoint "/api/mllp_messages"
   @valid_hl7 HL7.Examples.wikipedia_sample_hl7()
 
   describe "POST #{@api_endpoint}" do
     setup do
-      original_api_key = Application.get_env(:mllparty, :api_key)
-      Application.put_env(:mllparty, :api_key, @api_key)
-
-      authd_conn = build_conn() |> basic_auth("", @api_key)
-
       on_exit(fn ->
         MLLParty.ConnectionHub.reset()
-        Application.put_env(:mllparty, :api_key, original_api_key)
       end)
 
-      {:ok, %{conn: authd_conn}}
-    end
-
-    test "with missing API key" do
-      resp =
-        build_conn()
-        |> post(@api_endpoint, %{})
-        |> json_response(401)
-
-      assert resp == %{"message" => "Missing API key"}
-    end
-
-    test "with invalid API key" do
-      resp =
-        build_conn()
-        |> basic_auth("", "invalid")
-        |> post(@api_endpoint, %{})
-        |> json_response(401)
-
-      assert resp == %{"message" => "Invalid API key"}
+      {:ok, %{conn: build_conn()}}
     end
 
     test "with missing `endpoint` param", %{conn: conn} do
