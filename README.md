@@ -26,7 +26,6 @@ Validates and sends an HL7 message via MLLP
 ```bash
 # NB: The leading colon in the -u flag is required because it's basic auth with a blank username
 curl -X POST http://localhost:4000/api/mllp_messages \
-    -u ":sekret" \
     -H "Content-Type: application/json" \
     -d @- << 'EOF'
 {
@@ -63,7 +62,7 @@ This service is provided as a Docker image. To build and run the container:
 
 ```bash
 docker build . -t mllparty
-docker run --rm --env API_KEY="sekret" --env SECRET_KEY_BASE="$(mix phx.gen.secret)" -p 4000:4000 mllparty
+docker run --rm --env SECRET_KEY_BASE="$(mix phx.gen.secret)" -p 4000:4000 mllparty
 ```
 
 ### Persistent Connections
