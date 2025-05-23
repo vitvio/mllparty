@@ -42,6 +42,18 @@ DG1|1||786.50^CHEST PAIN, UNSPECIFIED^I9|||A"
 EOF
 ```
 
+If you want to hit the deployed mllparty in staging use this:
+Use credentials from engineering vault - note under MLLParty cloudflare credentials
+
+curl --request POST \
+  --url https://mllparty.staging.vitvio.com/api/mllp_messages \
+  --header 'CF-Access-Client-Id: <get me from 1 password >.access' \
+   --header 'CF-Access-Client-Secret: <get me from 1 password >'  \
+  --header 'Content-Type: application/json' \
+  --data '{
+        "endpoint": "mllp://127.0.0.1:65432",
+        "message": "MSH|^~\\&|MegaReg|XYZHospC|SuperOE|XYZImgCtr|20060529090131-0500||ADT^A01^ADT_A01|01052901|P|2.5"
+}'
 
 ## Getting Started
 
